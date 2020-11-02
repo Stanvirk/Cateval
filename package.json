@@ -1,0 +1,24 @@
+{
+  "name": "catevalapi",
+  "version": "1.0.0",
+  "description": "A sample project created while learning NodeJs with CodeWithMosh. The aim of project to implement some basic features required for RESTfull service (permissions, versionig and etc).  ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Stanvirk/Cateval.git"
+  },
+  "keywords": [
+    "REST",
+    "js",
+    "NodeJs"
+  ],
+  "author": "Stan Virk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Stanvirk/Cateval/issues"
+  },
+  "homepage": "https://github.com/Stanvirk/Cateval#readme"
+}
