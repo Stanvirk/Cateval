@@ -28,7 +28,8 @@ app.post('/api/admin/categories', (req, res) => {
     //TODO: should be performed by service layer
     const category = {
         id: categories.length + 1,
-        name: req.body.code
+        code: req.body.code,
+        description: req.body.description
     };
     categories.push(category);
 
@@ -41,7 +42,7 @@ app.get('/api/admin/categories', (req, res) => {
 });
 
 app.get('/api/admin/categories/:code', (req, res) => {
-    const category = categories.find(c => c.code === parseInt(req.params.code));
+    const category = categories.find(c => c.code === req.params.code);
     if (!category)
         //TODO: resource management?
         return res.status(404).send('Category with the given code not found');
@@ -50,7 +51,7 @@ app.get('/api/admin/categories/:code', (req, res) => {
 
 //  UPDATE
 app.put('/api/admin/categories/:code', (req, res) => {
-    const category = categories.find(c => c.code === parseInt(req.params.code));
+    const category = categories.find(c => c.code === req.params.code);
     if (!category)
         return res.status(404).send('Category with the given code not found');
 
@@ -66,7 +67,7 @@ app.put('/api/admin/categories/:code', (req, res) => {
 
 //  DELETE
 app.delete('/api/admin/categories/:code', (req, res) => {
-    const category = categories.find(c => c.code === parseInt(req.params.code));
+    const category = categories.find(c => c.code === req.params.code);
     if (!category)
         return res.status(404).send('Course with the given id not found');
 

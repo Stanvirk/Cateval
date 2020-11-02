@@ -1,0 +1,4 @@
+Features to implement:
+* Logging.
+* Permissins system
+* Versioning
