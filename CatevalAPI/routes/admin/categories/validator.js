@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const debug = require('debug')('app:core.controller.admin.categories.validation');
 
 //TODO: Validation should be also separated
 function validateCategory(category) {

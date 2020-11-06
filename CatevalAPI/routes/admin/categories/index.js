@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const debug = require('debug')('app:core.controller.admin.categories');
 const validator = require('./validator');
 
 //TODO: move to DAL.
