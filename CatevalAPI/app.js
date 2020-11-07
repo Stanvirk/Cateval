@@ -2,12 +2,12 @@
 // this part is used only for display purposes to avoid pollution system varaibles
 // -----------------------------------------------------
 process.env['NODE_ENV'] = 'development';
-process.env['DEBUG'] = 'app:core.*';
+process.env['DEBUG'] = 'app.*';
 // -----------------------------------------------------
 
 const express = require('express');
 //TODO: set DEBUG from config file instead of env var
-const debug = require('debug')('app:core.startup');
+const debug = require('debug')('app.startup');
 const config = require('config');
 const admin = require('./routes/admin');
 
