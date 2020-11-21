@@ -4,7 +4,7 @@
 The current repository is for my first project on a javascript learning path.  
 
 ## Description
-
+Service for evaluation questionnaire answers to determimne the right category.
 
 ### Technology stack 
 * PL: Javascript
