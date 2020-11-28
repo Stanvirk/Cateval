@@ -1,74 +1,80 @@
 const router = require('express').Router();
 const debug = require('debug')('app.controller.admin.categories');
 const validator = require('./validator');
+const CategoryService = require('../../../dal/services/category-service');
 
-//TODO: move to DAL.
-const categories = [
-    { id: 1, code: 'A', description: 'Success' },
-    { id: 2, code: 'B', description: 'Partial access' },
-    { id: 1, code: 'F', description: 'No context provided' }
-];
+const categoryService = new CategoryService();
 
 //Categories controller
 //  CREATE
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
+    debug(`Incoming create request:\n${JSON.stringify(req.body)}`);
     const { error } = validator.validateCategory(req.body);
-
-    if (error)
+    if (error) {
+        debug(`Create request errors:\n${JSON.stringify(error)}`);
         return res.status(400).send(error.details[0].message);
+    }
 
-    //TODO: should be performed by service layer
-    const category = {
-        id: categories.length + 1,
-        code: req.body.code,
-        description: req.body.description
-    };
-    categories.push(category);
-
-    res.send(category);
+    const newCategory = await categoryService
+        .create(req.body.code, req.body.description);
+    debug(`New entity created:\n${JSON.stringify(newCategory)}`);
+    res.send(newCategory);
 });
 
 // READ
-router.get('', (req, res) => {
+router.get('', async (req, res) => {
+    debug(`A list of all categories were requested`);
+    var categories = await categoryService.getList({});
     res.send(categories);
 });
 
-router.get('/:code', (req, res) => {
-    //TODO: should be performed by service layer
-    const category = categories.find(c => c.code === req.params.code);
-    if (!category)
-        //TODO: resource management?
+router.get('/:code', async (req, res) => {
+    debug(`Find by code request:\n${JSON.stringify(req.params)}`);
+    const category = await categoryService.findByCode(req.params.code);
+    if (!category) {
+        debug(`No category found`);
         return res.status(404).send('Category with the given code not found');
+    }
+    debug(`Entity found:\n${JSON.stringify(category)}`);
     res.send(category);
 });
 
 //  UPDATE
-router.put('/:code', (req, res) => {
+router.put('/:code', async (req, res) => {
+    debug(`Update request:\n${JSON.stringify(req.body)}`);
     //TODO: should be performed by service layer
-    const category = categories.find(c => c.code === req.params.code);
-    if (!category)
+    const category = await categoryService.findByCode(req.params.code);
+    if (!category) {
+        debug(`No category found`);
         return res.status(404).send('Category with the given code not found');
+    }
 
     const { error } = validator.validateCategory(req.body);
 
-    if (error)
+    if (error) {
+        debug(`Invalid update request:\n${JSON.stringify(error)}`);
         return res.status(400).send(error.details[0].message);
+    }
+    const newCategory = await categoryService
+        .create(
+            req.body.code,
+            req.body.description || category.description);
 
-    category.code = req.body.code;
-    category.description = req.body.description || category.description;
-    res.send(category);
+    debug(`Updated entity:\n${JSON.stringify(newCategory)}`);
+    res.send(newCategory);
 });
 
 //  DELETE
-router.delete('/:code', (req, res) => {
+router.delete('/:code', async (req, res) => {
     //TODO: should be performed by service layer
-    const category = categories.find(c => c.code === req.params.code);
-    if (!category)
+    debug(`Delete request ${req.body}`);
+    const category = await categoryService.deleteByCode(req.params.code);
+    if (!category) {
+        debug(`No category found`);
         return res.status(404).send('Course with the given id not found');
+    }
 
-    const index = categories.indexOf(category);
-    categories.splice(index, 1);
-
+    debug(`Deleted entity ${category}`);
     res.send(category);
 });
 

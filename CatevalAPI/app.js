@@ -17,7 +17,7 @@ const port = process.env.PORT || config.get('port') || 3000;
 const app = express();
 app.use(express.json());
 
-app.use('/api/admin', admin)
+app.use('/api/admin', admin);
 
 //TODO: app.js should contain only application related stuff. Basically like Startup.cs in .NET apps
 app.listen(port, () => {
