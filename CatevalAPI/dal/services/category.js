@@ -1,6 +1,6 @@
 const Category = require('../schema/category');
-const debug = require('debug')('app.services.category-service');
-const BaseService = require('./base-service');
+const debug = require('debug')('app.services.category');
+const BaseService = require('./base');
 
 
 class CategoryService extends BaseService {
@@ -33,7 +33,8 @@ class CategoryService extends BaseService {
     async getList(filter) {
         //TODO:convert filter to query filter
         try {
-            return await Category.find({});
+            return await Category.find({})
+                .sort('name');
         } catch (ex) {
             //TODO:Add error handling error
             debug(`Error while returning a list\n${JSON.stringify(ex)}`);
@@ -50,4 +51,4 @@ class CategoryService extends BaseService {
     }
 }
 
-module.exports = CategoryService;
+exports = CategoryService;

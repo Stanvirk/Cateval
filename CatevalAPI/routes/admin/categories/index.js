@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const debug = require('debug')('app.controller.admin.categories');
 const validator = require('./validator');
-const CategoryService = require('../../../dal/services/category-service');
+const CategoryService = require('../../../dal/services/category');
 
 const categoryService = new CategoryService();
 
@@ -57,7 +57,7 @@ router.put('/:code', async (req, res) => {
     }
     const newCategory = await categoryService
         .create(
-            req.body.code,
+            req.params.code,
             req.body.description || category.description);
 
     debug(`Updated entity:\n${JSON.stringify(newCategory)}`);
@@ -79,4 +79,4 @@ router.delete('/:code', async (req, res) => {
 });
 
 
-module.exports = router;
+exports = router;
