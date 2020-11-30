@@ -34,4 +34,4 @@ router.get('/:code', async (req, res) => {
 //get user questionnaireds
 //disable user
 
-exports = router;
+module.exports = router;

@@ -6,4 +6,4 @@ const RulesService = require('../../../dal/services/rules');
 const rulesService = new RulesService();
 
 
-exports = router;
+module.exports = router;

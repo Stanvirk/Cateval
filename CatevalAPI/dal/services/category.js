@@ -51,4 +51,4 @@ class CategoryService extends BaseService {
     }
 }
 
-exports = CategoryService;
+module.exports = CategoryService;

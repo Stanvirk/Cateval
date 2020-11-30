@@ -8,4 +8,4 @@ router.use('/admin', admin);
 router.use('/data', data);
 router.use('/eval', eval);
 
-exports = router;
+module.exports = router;

@@ -16,4 +16,4 @@ function validateCategory(category) {
     return schema.validate(category);
 }
 
-exports.validateCategory = validateCategory;
+module.exports.validateCategory = validateCategory;

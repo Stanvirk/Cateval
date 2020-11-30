@@ -1,4 +1,6 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const Questionnaire = require('./questionnaire');
+
 //TODO: 1. Think out a better name for customers who owns a questionnaires and manages them.
 //TODO: 2. Work out specs to determine what need to be saved for customer
 const Customer = mongoose.model('Customers',
@@ -24,8 +26,12 @@ const Customer = mongoose.model('Customers',
         disabledFrom: {
             type: Date,
             required: false
+        },
+        questionnaires:{
+            type: [mongoose.Schema.Types.ObjectId],
+            ref: Questionnaire.modelName
         }
     })
 );
 
-exports = Customer;
+module.exports = Customer;
