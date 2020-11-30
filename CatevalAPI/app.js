@@ -24,3 +24,9 @@ app.use('/api/', routes);
 app.listen(port, () => {
     debug(`Listening on port ${port}`);
 });
+
+
+//TODO:
+//* Rule and category relations should be implemented by references on admin side,
+//  When editing is finifhed the category should be compiled into one document 
+//  whish will be used on calculations
