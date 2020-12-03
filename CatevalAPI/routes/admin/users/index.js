@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const debug = require('debug')('app.controller.admin.users');
-const CustomerService = require('../../../dal/services/customer');
+const CustomerAccessor = require('../../../dal/acessors/customer');
 
-const customerService = new CustomerService();
+const customerAccessor = new CustomerAccessor();
 
 //add new user
 router.post('/', async (req, res) => {
@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
         return res.status(400).send(error.details[0].message);
     }
 
-    const newCategory = await customerService
+    const newCategory = await customerAccessor
         .create(req.body.name, req.body.description);
     debug(`New entity created:\n${JSON.stringify(newCategory)}`);
     res.send(newCategory);
@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
 //get user info
 router.get('/:code', async (req, res) => {
     debug(`Find by code request:\n${JSON.stringify(req.params)}`);
-    const category = await customerService.findByCode(req.params.name);
+    const category = await customerAccessor.findByCode(req.params.name);
     if (!category) {
         debug(`No category found`);
         return res.status(404).send('Customer with the given name not found');

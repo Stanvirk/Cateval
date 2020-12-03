@@ -1,13 +1,13 @@
 const { Rule } = require('../schema/rule');
 const { RuleGroup } = require('../schema/rule-group');
 const debug = require('debug')('app.services.customer');
-const BaseService = require('./base');
+const BaseAccessor = require('./base');
 
 
-class RulesService extends BaseService {
+class RulesAccessor extends BaseAccessor {
     constructor() {
         super();
     }
 }
 
-module.exports = RulesService;
+module.exports = RulesAccessor;

@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const debug = require('debug')('app.controller.admin.categories');
 const validator = require('./validator');
-const CategoryService = require('../../../dal/services/category');
+const CategoryAccessor = require('../../../dal/acessors/category');
 
-const categoryService = new CategoryService();
+const categoryAccessor = new CategoryAccessor();
 
 //Categories controller
 //  CREATE
@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
         return res.status(400).send(error.details[0].message);
     }
 
-    const newCategory = await categoryService
+    const newCategory = await categoryAccessor
         .create(req.body.code, req.body.description);
     debug(`New entity created:\n${JSON.stringify(newCategory)}`);
     res.send(newCategory);
@@ -24,13 +24,13 @@ router.post('/', async (req, res) => {
 // READ
 router.get('', async (req, res) => {
     debug(`A list of all categories were requested`);
-    var categories = await categoryService.getList({});
+    var categories = await categoryAccessor.getList({});
     res.send(categories);
 });
 
 router.get('/:code', async (req, res) => {
     debug(`Find by code request:\n${JSON.stringify(req.params)}`);
-    const category = await categoryService.findByCode(req.params.code);
+    const category = await categoryAccessor.findByCode(req.params.code);
     if (!category) {
         debug(`No category found`);
         return res.status(404).send('Category with the given code not found');
@@ -43,7 +43,7 @@ router.get('/:code', async (req, res) => {
 router.put('/:code', async (req, res) => {
     debug(`Update request:\n${JSON.stringify(req.body)}`);
     //TODO: should be performed by service layer
-    const category = await categoryService.findByCode(req.params.code);
+    const category = await categoryAccessor.findByCode(req.params.code);
     if (!category) {
         debug(`No category found`);
         return res.status(404).send('Category with the given code not found');
@@ -55,7 +55,7 @@ router.put('/:code', async (req, res) => {
         debug(`Invalid update request:\n${JSON.stringify(error)}`);
         return res.status(400).send(error.details[0].message);
     }
-    const newCategory = await categoryService
+    const newCategory = await categoryAccessor
         .create(
             req.params.code,
             req.body.description || category.description);
@@ -68,7 +68,7 @@ router.put('/:code', async (req, res) => {
 router.delete('/:code', async (req, res) => {
     //TODO: should be performed by service layer
     debug(`Delete request ${req.body}`);
-    const category = await categoryService.deleteByCode(req.params.code);
+    const category = await categoryAccessor.deleteByCode(req.params.code);
     if (!category) {
         debug(`No category found`);
         return res.status(404).send('Course with the given id not found');

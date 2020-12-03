@@ -1,8 +1,9 @@
-const Customer = require('../schema/customer');
-const debug = require('debug')('app.services.customer');
-const BaseService = require('./base');
 
-class CustomerService extends BaseService {
+const debug = require('debug')('app.accessor.customer');
+const Customer = require('../schema/customer');
+const BaseAccessor = require('./base');
+
+class CustomerAccessor extends BaseAccessor {
     constructor() {
         super();
     }
@@ -68,4 +69,4 @@ class CustomerService extends BaseService {
     }
 }
 
-module.exports = CustomerService;
+module.exports = CustomerAccessor;

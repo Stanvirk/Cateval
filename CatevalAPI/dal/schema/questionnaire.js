@@ -1,3 +1,4 @@
+const { boolean } = require('joi');
 const mongoose = require('mongoose');
 const Question = require('./question');
 
@@ -15,6 +16,11 @@ const Questionnaire = mongoose.model('Questionnaires',
             required: true,
             minlength: 10,
             maxlength: 255
+        },
+        single:{
+            type: Boolean,
+            required:false,
+            default:false
         },
         questions:{
             type: [mongoose.Schema.Types.ObjectId],

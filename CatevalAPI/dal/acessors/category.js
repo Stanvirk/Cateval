@@ -1,9 +1,9 @@
+
+const debug = require('debug')('app.accessors.category');
 const Category = require('../schema/category');
-const debug = require('debug')('app.services.category');
-const BaseService = require('./base');
+const BaseAccessor = require('./base');
 
-
-class CategoryService extends BaseService {
+class CategoryAccessor extends BaseAccessor {
     constructor() {
         super();
     }
@@ -51,4 +51,4 @@ class CategoryService extends BaseService {
     }
 }
 
-module.exports = CategoryService;
+module.exports = CategoryAccessor;

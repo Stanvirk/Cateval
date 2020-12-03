@@ -10,10 +10,10 @@ mongoose.connect('mongodb://192.168.0.27/cateval',
     .then(() => console.log('Connected to MongoDB...'))
     .catch((err) => console.error('Could not connect to database:', err));
 
-class BaseService {
+class BaseAccessor {
     constructor() {
         
     }
 }
 
-module.exports = BaseService;
+module.exports = BaseAccessor;

@@ -30,3 +30,5 @@ app.listen(port, () => {
 //* Rule and category relations should be implemented by references on admin side,
 //  When editing is finifhed the category should be compiled into one document 
 //  whish will be used on calculations
+
+//* Add model's module where api input objects Join schema will be described(for validation)
